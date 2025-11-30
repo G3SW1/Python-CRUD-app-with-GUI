@@ -2,6 +2,7 @@ from typing import Optional
 from user import User
 from admin import Admin
 
+
 def find_user_by_login(
     username: str,
     password: str,

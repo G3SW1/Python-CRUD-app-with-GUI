@@ -2,28 +2,27 @@ import tkinter as gui
 from tkinter import messagebox
 from pathlib import Path
 
-_THIS_DIR = Path(__file__).resolve().parent   # .../CRUD python/AppGUI
-_PROJECT_ROOT = _THIS_DIR.parent              # .../CRUD python
+_THIS_DIR = Path(__file__).resolve().parent
+_PROJECT_ROOT = _THIS_DIR.parent
 DATA_DIR = _PROJECT_ROOT / "DATA"
+
 
 def logSelect():
     logSelectWindow = gui.Toplevel()
     logSelectWindow.title("História prihlásení")
     logSelectWindow.geometry("400x400")
 
-    button1 = gui.Button(
+    gui.Button(
         logSelectWindow,
         text="Zobraziť históriu prihlásení Admin",
         command=showAdminLogs,
-    )
-    button1.place(relx=0.1, rely=0.1)
+    ).place(relx=0.1, rely=0.1)
 
-    button2 = gui.Button(
+    gui.Button(
         logSelectWindow,
         text="Zobraziť históriu prihlásení Používateľ",
         command=showUserLogs,
-    )
-    button2.place(relx=0.1, rely=0.2)
+    ).place(relx=0.1, rely=0.2)
 
 
 def showUserLogs():
@@ -34,7 +33,7 @@ def showUserLogs():
     text = gui.Text(logWindow, wrap="word")
     text.pack(fill="both", expand=True, padx=10, pady=10)
 
-    filename = DATA_DIR / "user.txt"  # match save_login
+    filename = DATA_DIR / "user.txt"
     try:
         with open(filename, "r", encoding="utf-8") as f:
             content = f.read().strip()
@@ -56,7 +55,7 @@ def showAdminLogs():
     text = gui.Text(logWindow, wrap="word")
     text.pack(fill="both", expand=True, padx=10, pady=10)
 
-    filename = DATA_DIR / "admin.txt"  # match save_login
+    filename = DATA_DIR / "admin.txt"
     try:
         with open(filename, "r", encoding="utf-8") as f:
             content = f.read().strip()

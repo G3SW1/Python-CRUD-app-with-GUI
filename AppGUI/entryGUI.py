@@ -1,11 +1,9 @@
 import tkinter as gui
 from tkinter import messagebox
-
-import os
 from pathlib import Path
 
-_THIS_DIR = Path(__file__).resolve().parent      # .../CRUD python/AppGUI
-_PROJECT_ROOT = _THIS_DIR.parent                 # .../CRUD python
+_THIS_DIR = Path(__file__).resolve().parent
+_PROJECT_ROOT = _THIS_DIR.parent
 
 FILENAME = _PROJECT_ROOT / "DATA" / "entries.txt"
 
@@ -57,21 +55,15 @@ def entryAdd():
     NewEmtryWindow.title("Pridanie nového záznamu")
     NewEmtryWindow.geometry("500x400")
 
-    NameLabel = gui.Label(NewEmtryWindow, text="Názov položky:")
-    NameLabel.place(relx=0.1, rely=0.1)
-
+    gui.Label(NewEmtryWindow, text="Názov položky:").place(relx=0.1, rely=0.1)
     Field1 = gui.Entry(NewEmtryWindow, width=40)
     Field1.place(relx=0.1, rely=0.2)
 
-    TagLabel = gui.Label(NewEmtryWindow, text="Skladové označenie:")
-    TagLabel.place(relx=0.1, rely=0.3)
-
+    gui.Label(NewEmtryWindow, text="Skladové označenie:").place(relx=0.1, rely=0.3)
     Field2 = gui.Entry(NewEmtryWindow, width=40)
     Field2.place(relx=0.1, rely=0.4)
 
-    QuantityLabel = gui.Label(NewEmtryWindow, text="Počet kusov:")
-    QuantityLabel.place(relx=0.1, rely=0.5)
-
+    gui.Label(NewEmtryWindow, text="Počet kusov:").place(relx=0.1, rely=0.5)
     Field3 = gui.Entry(NewEmtryWindow, width=40)
     Field3.place(relx=0.1, rely=0.6)
 
@@ -95,7 +87,9 @@ def entryAdd():
         NewEmtryWindow.destroy()
 
     gui.Button(NewEmtryWindow, text="Uložiť", command=on_save).place(relx=0.1, rely=0.7)
-    gui.Button(NewEmtryWindow, text="Zrušiť", command=NewEmtryWindow.destroy).place(relx=0.1, rely=0.8)
+    gui.Button(NewEmtryWindow, text="Zrušiť", command=NewEmtryWindow.destroy).place(
+        relx=0.1, rely=0.8
+    )
 
 
 def entryEdit():
@@ -122,9 +116,12 @@ def entryEdit():
             def handler():
                 open_edit_single_entry(i)
                 win.destroy()
+
             return handler
 
-        gui.Button(win, text="Upraviť", command=make_edit_handler()).grid(row=row, column=3, padx=10, pady=2)
+        gui.Button(win, text="Upraviť", command=make_edit_handler()).grid(
+            row=row, column=3, padx=10, pady=2
+        )
 
 
 def open_edit_single_entry(index: int):
@@ -139,23 +136,17 @@ def open_edit_single_entry(index: int):
     editWin.title("Upraviť záznam")
     editWin.geometry("500x400")
 
-    NameLabel = gui.Label(editWin, text="Názov položky:")
-    NameLabel.place(relx=0.1, rely=0.1)
-
+    gui.Label(editWin, text="Názov položky:").place(relx=0.1, rely=0.1)
     Field1 = gui.Entry(editWin, width=40)
     Field1.place(relx=0.1, rely=0.2)
     Field1.insert(0, name)
 
-    TagLabel = gui.Label(editWin, text="Skladové označenie:")
-    TagLabel.place(relx=0.1, rely=0.3)
-
+    gui.Label(editWin, text="Skladové označenie:").place(relx=0.1, rely=0.3)
     Field2 = gui.Entry(editWin, width=40)
     Field2.place(relx=0.1, rely=0.4)
     Field2.insert(0, short)
 
-    QuantityLabel = gui.Label(editWin, text="Počet kusov:")
-    QuantityLabel.place(relx=0.1, rely=0.5)
-
+    gui.Label(editWin, text="Počet kusov:").place(relx=0.1, rely=0.5)
     Field3 = gui.Entry(editWin, width=40)
     Field3.place(relx=0.1, rely=0.6)
     Field3.insert(0, str(qty))
@@ -213,9 +204,12 @@ def entryDelete():
             def make_delete_handler(i=idx):
                 def handler():
                     do_delete(i)
+
                 return handler
 
-            gui.Button(win, text="Odstrániť", command=make_delete_handler()).grid(row=row, column=3, padx=10, pady=2)
+            gui.Button(win, text="Odstrániť", command=make_delete_handler()).grid(
+                row=row, column=3, padx=10, pady=2
+            )
 
     def do_delete(idx: int):
         current_entries = read_entries()
@@ -239,9 +233,15 @@ def entryView():
     win.title("Zobraziť záznamy")
     win.geometry("600x400")
 
-    gui.Label(win, text="Názov", font=("Arial", 10, "bold")).grid(row=0, column=0, padx=10, pady=5, sticky="w")
-    gui.Label(win, text="Skladové označenie", font=("Arial", 10, "bold")).grid(row=0, column=1, padx=10, pady=5, sticky="w")
-    gui.Label(win, text="Počet kusov", font=("Arial", 10, "bold")).grid(row=0, column=2, padx=10, pady=5, sticky="w")
+    gui.Label(win, text="Názov", font=("Arial", 10, "bold")).grid(
+        row=0, column=0, padx=10, pady=5, sticky="w"
+    )
+    gui.Label(win, text="Skladové označenie", font=("Arial", 10, "bold")).grid(
+        row=0, column=1, padx=10, pady=5, sticky="w"
+    )
+    gui.Label(win, text="Počet kusov", font=("Arial", 10, "bold")).grid(
+        row=0, column=2, padx=10, pady=5, sticky="w"
+    )
 
     for idx, (name, short, qty) in enumerate(entries):
         row = idx + 1
